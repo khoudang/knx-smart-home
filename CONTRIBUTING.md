@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for contributing to KNX Smart Home, developed by AICONTROL.
+Thank you for contributing to KNX Smart Home, created and maintained by [khoudang](https://github.com/khoudang).
 
 ## Before making changes
 

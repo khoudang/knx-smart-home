@@ -7,7 +7,7 @@
     "check:public": "python scripts/check_public_tree.py"
   },
   "keywords": [],
-  "author": "AICONTROL",
+  "author": "khoudang",
   "license": "ISC",
   "dependencies": {
     "google-auth-library": "^10.7.0",

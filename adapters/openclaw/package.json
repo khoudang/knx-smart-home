@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Optional OpenClaw skills and Siri tools for KNX Smart Home",
   "keywords": [],
-  "author": "AICONTROL",
+  "author": "khoudang",
   "license": "ISC",
   "dependencies": {
     "google-auth-library": "^10.7.0",

@@ -16,7 +16,9 @@ are available on the default branch and are not a published release guarantee.
 
 ### Changed
 
-- Project identity and repository name to KNX Smart Home, developed by AICONTROL.
+- Author and maintainer attribution to khoudang.
+
+- Project identity and repository name to KNX Smart Home.
 
 ### Known limitations
 

@@ -2,7 +2,7 @@
 
 **Conversational KNX automation with Telegram, Zalo, and Homebridge.**
 
-Developed by **AICONTROL**.
+Created and maintained by [khoudang](https://github.com/khoudang).
 
 [![CI](https://github.com/khoudang/knx-smart-home/actions/workflows/ci.yml/badge.svg)](https://github.com/khoudang/knx-smart-home/actions/workflows/ci.yml)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
@@ -220,9 +220,9 @@ Start in dry-run mode and validate device mappings, permissions, and state feedb
 enabling hardware control. See [deployment guidance](docs/setup.md) and the
 [security policy](SECURITY.md) for operational details.
 
-## Maintained by AICONTROL
+## Support
 
-KNX Smart Home is developed by AICONTROL. Use [GitHub Issues](https://github.com/khoudang/knx-smart-home/issues)
+Use [GitHub Issues](https://github.com/khoudang/knx-smart-home/issues)
 for reproducible bugs and feature requests. Report vulnerabilities through the
 [security policy](SECURITY.md).
 
