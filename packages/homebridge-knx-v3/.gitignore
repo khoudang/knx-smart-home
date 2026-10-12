@@ -1,0 +1,6 @@
+node_modules/
+*.bak
+*.bak2
+*.bak3
+*.fail.bak
+*.log

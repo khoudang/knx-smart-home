@@ -1,0 +1,14 @@
+{
+  "name": "chatbot-gateway",
+  "version": "1.0.0",
+  "description": "Zalo and Telegram Gateway for Smart Home",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.65.1",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5"
+  }
+}

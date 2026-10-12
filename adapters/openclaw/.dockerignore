@@ -1,0 +1,11 @@
+node_modules/
+venv/
+__pycache__/
+*.pyc
+logs/
+.git/
+.agents/
+.codex/
+.env
+agent.json.bak
+chat_logs.jsonl

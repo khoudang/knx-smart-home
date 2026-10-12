@@ -1,0 +1,28 @@
+{
+  "name": "homebridge-knx-v3",
+  "displayName": "Homebridge KNX V3",
+  "version": "0.1.0",
+  "description": "Modern KNX plugin for Homebridge",
+  "main": "index.js",
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge",
+    "knx",
+    "homekit"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "homebridge": "^2.0.0"
+  },
+  "homebridge": {
+    "pluginIdentifier": "homebridge-knx-v3",
+    "platformName": "KNXV3"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "knx": "^2.5.4",
+    "knxultimate": "^6.0.1"
+  }
+}

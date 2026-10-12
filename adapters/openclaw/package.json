@@ -1,0 +1,17 @@
+{
+  "name": "openclaw-local",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-auth-library": "^10.7.0",
+    "google-spreadsheet": "^5.3.0",
+    "openclaw": "^2026.6.6"
+  }
+}

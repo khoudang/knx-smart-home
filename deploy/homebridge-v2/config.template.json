@@ -1,0 +1,27 @@
+{
+    "bridge": {"name": "Homebridge", "username": "0E:75:37:C1:90:8E", "port": 51768, "pin": "142-47-375", "advertiser": "avahi"},
+    "accessories": [],
+    "platforms": [
+        {"name": "Config", "port": 8581, "platform": "config"},
+        {
+            "platform": "SynTexKNX",
+            "name": "SynTexKNX",
+            "baseDirectory": "/var/homebridge/SynTex",
+            "ip": "192.0.2.10",
+            "options": {"port": 1714, "language": "en", "disablePreload": true, "rateLimit": 300},
+            "log": {"debug": false},
+            "accessories": [
+                {"id": "0/0/1", "name": "Đèn Led Dây", "services": [{"address": {"status": "0/0/2", "control": "0/0/1"}, "type": "switch"}]},
+                {"id": "0/0/3", "name": "Đèn Tròn", "services": [{"address": {"status": "0/0/4", "control": "0/0/3"}, "type": "switch"}]},
+                {"id": "0/0/7", "name": "Đèn D", "services": [{"address": {"status": "0/0/8", "control": "0/0/7"}, "type": "switch"}]},
+                {"id": "0/0/9", "name": "Đèn E", "services": [{"address": {"status": "0/0/10", "control": "0/0/9"}, "type": "switch"}]},
+                {"id": "0/0/11", "name": "Đèn F", "services": [{"address": {"status": "0/0/12", "control": "0/0/11"}, "type": "switch"}]},
+                {"id": "0/0/13", "name": "Đèn G", "services": [{"address": {"status": "0/0/14", "control": "0/0/13"}, "type": "switch"}]},
+                {"id": "0/0/100", "name": "Đèn H", "services": [{"address": {"status": "0/0/101", "control": "0/0/100"}, "type": "switch"}]},
+                {"id": "0/1/2", "name": "G1 Đèn Trần", "services": [{"type": "dimmer", "address": {"status": {"value": "0/1/1", "brightness": "0/1/3"}, "control": {"brightness": "0/1/2"}}}]},
+                {"id": "0/4/0", "name": "Scene-1", "services": [{"address": {"status": "0/4/0", "control": "0/4/0"}, "type": "switch"}]},
+                {"id": "0/4/2", "name": "Scene-2", "services": [{"address": {"status": "0/4/2", "control": "0/4/2"}, "type": "switch"}]}
+            ]
+        }
+    ]
+}

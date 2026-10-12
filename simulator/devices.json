@@ -1,0 +1,82 @@
+[
+  {
+    "id": "lr_light_main",
+    "room": "living_room",
+    "type": "light",
+    "capabilities": ["on_off", "brightness", "color_temp"],
+    "group_address": "SIM-1/1/1",
+    "state": {"on": false, "brightness": 0, "color_temp_k": 3000}
+  },
+  {
+    "id": "lr_curtain",
+    "room": "living_room",
+    "type": "curtain",
+    "capabilities": ["position"],
+    "group_address": "SIM-1/1/2",
+    "state": {"position": 0}
+  },
+  {
+    "id": "lr_ac",
+    "room": "living_room",
+    "type": "ac",
+    "capabilities": ["on_off", "mode", "temperature_setpoint", "fan_speed"],
+    "group_address": "SIM-1/1/3",
+    "state": {"on": false, "mode": "cool", "temperature_setpoint": 24, "fan_speed": "auto"}
+  },
+  {
+    "id": "lr_sensor_temp_hum",
+    "room": "living_room",
+    "type": "sensor",
+    "capabilities": ["temperature", "humidity"],
+    "group_address": "SIM-1/1/4",
+    "state": {"temperature": 25.0, "humidity": 60.0}
+  },
+  {
+    "id": "br_light_main",
+    "room": "bedroom",
+    "type": "light",
+    "capabilities": ["on_off", "brightness", "color_temp"],
+    "group_address": "SIM-2/1/1",
+    "state": {"on": false, "brightness": 0, "color_temp_k": 3000}
+  },
+  {
+    "id": "br_light_pulse",
+    "room": "bedroom",
+    "type": "light",
+    "capabilities": ["on_off", "pulse"],
+    "group_address": "SIM-2/1/2",
+    "state": {"on": false}
+  },
+  {
+    "id": "br_ac",
+    "room": "bedroom",
+    "type": "ac",
+    "capabilities": ["on_off", "mode", "temperature_setpoint", "fan_speed"],
+    "group_address": "SIM-2/1/3",
+    "state": {"on": false, "mode": "cool", "temperature_setpoint": 26, "fan_speed": "low"}
+  },
+  {
+    "id": "gate_main",
+    "room": "gate",
+    "type": "gate",
+    "capabilities": ["open_close_stop"],
+    "group_address": "SIM-3/1/1",
+    "state": {"status": "closed"}
+  },
+  {
+    "id": "gate_lock",
+    "room": "gate",
+    "type": "lock",
+    "capabilities": ["lock_unlock"],
+    "group_address": "SIM-3/1/2",
+    "state": {"locked": true}
+  },
+  {
+    "id": "gate_motion",
+    "room": "gate",
+    "type": "sensor",
+    "capabilities": ["motion"],
+    "group_address": "SIM-3/1/3",
+    "state": {"motion": false}
+  }
+]

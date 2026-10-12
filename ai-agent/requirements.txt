@@ -1,0 +1,13 @@
+paho-mqtt==1.6.1
+pg8000==1.31.5
+python-dotenv==1.0.1
+openai
+flask==3.0.3
+fastapi
+uvicorn
+requests
+google-api-python-client==2.160.0
+google-auth==2.38.0
+simpleeval
+yfinance
+pytz

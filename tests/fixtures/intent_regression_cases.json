@@ -1,0 +1,52 @@
+[
+  {
+    "input": "he thong co chan ai khong",
+    "expected_domain": "access_control",
+    "expected_intent": "list_blocked_users"
+  },
+  {
+    "input": "xoa tuan anh ra khoi nha",
+    "expected_domain": "access_control",
+    "expected_intent": "remove_user"
+  },
+  {
+    "input": "thoi tiet go vap hom nay co mua khong",
+    "expected_domain": "weather",
+    "expected_intent": "get_current_weather"
+  },
+  {
+    "input": "tim tren web KNX la gi",
+    "expected_domain": "web_search",
+    "expected_intent": "web_search"
+  },
+  {
+    "input": "hien tai he thong co scene gi",
+    "expected_domain": "scene",
+    "expected_intent": "list_scenes"
+  },
+  {
+    "input": "chay scene dam cuoi",
+    "expected_domain": "scene",
+    "expected_intent": "activate_scene"
+  },
+  {
+    "input": "bat den tron",
+    "expected_domain": "device_control",
+    "expected_intent": "set_device_state"
+  },
+  {
+    "input": "dat den khach 50 phan tram",
+    "expected_domain": "device_control",
+    "expected_intent": "set_device_value"
+  },
+  {
+    "input": "den tron dang bat hay tat",
+    "expected_domain": "device_control",
+    "expected_intent": "query_device_state"
+  },
+  {
+    "input": "toi hoi met qua",
+    "expected_domain": "general_chat",
+    "expected_intent": "chat"
+  }
+]

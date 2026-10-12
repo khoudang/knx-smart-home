@@ -1,0 +1,9 @@
+{
+  "skills": [
+    {
+      "name": "sync_devices",
+      "path": "skills/fetch_devices.js",
+      "description": "Lấy danh sách thiết bị từ Google Sheets"
+    }
+  ]
+}

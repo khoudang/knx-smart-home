@@ -1,0 +1,21 @@
+{
+  "devices": [
+    {
+      "id": "den_tron_rd",
+      "room": "Phong R&D",
+      "type": "light",
+      "group_address": "0/0/3",
+      "capabilities": ["turn_on", "turn_off", "read_state"],
+      "ha_entity_id": "light.den_tron_rd"
+    }
+  ],
+  "scenes": [],
+  "scene_actions": [],
+  "users_permissions": [
+    {
+      "user_id": "1000000001",
+      "platform": "telegram",
+      "role": "owner"
+    }
+  ]
+}
