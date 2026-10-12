@@ -16,7 +16,7 @@ while Homebridge integrations expose supported devices to Apple Home.
 Language models interpret requests. Application code resolves device identifiers,
 checks permissions, and validates control operations against the registry.
 
-[Quick start](#quick-start) ? [Configuration](#configuration) ? [Integrations](#integrations) ? [Development](#development)
+[Quick start](#quick-start) | [Documentation](docs/README.md) | [Integrations](#integrations) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
 ## Features
 
