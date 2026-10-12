@@ -1,17 +1,22 @@
 {
-  "name": "openclaw-local",
+  "name": "knx-smart-home-openclaw",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Optional OpenClaw skills and Siri tools for KNX Smart Home",
   "keywords": [],
-  "author": "",
+  "author": "AICONTROL",
   "license": "ISC",
   "dependencies": {
     "google-auth-library": "^10.7.0",
     "google-spreadsheet": "^5.3.0",
     "openclaw": "^2026.6.6"
-  }
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoudang/knx-smart-home.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khoudang/knx-smart-home/issues"
+  },
+  "homepage": "https://github.com/khoudang/knx-smart-home#readme"
 }

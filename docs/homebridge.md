@@ -1,37 +1,48 @@
-# Homebridge
+# Homebridge integration
 
-Có ba lựa chọn. Chọn một đường cho mỗi thiết bị để tránh tạo accessory trùng và lệnh trùng.
+Choose one integration path for each device. Running multiple paths against the
+same device can create duplicate accessories and conflicting commands.
 
-## MQTT qua agent chính
+## MQTT registry integration
 
-`scripts/sync_homebridge.py` sinh cấu hình **mqttthing** từ SQLite.
-Bridge `knx-bridge/bridge.py` xử lý MQTT và đọc mapping KNX từ cùng registry.
-Đây là đường tích hợp của agent chính. Cài plugin mqttthing riêng trong Homebridge,
-kiểm tra phương án `--dry-run` trước khi dùng `--apply`.
+`scripts/sync_homebridge.py` generates `mqttthing` accessories from SQLite.
+`knx-bridge/bridge.py` consumes MQTT commands and publishes state using the registry's
+KNX mappings. Install `mqttthing` in your Homebridge environment separately.
 
-## Plugin v3
+```bash
+python -m scripts.sync_homebridge --database data/smart_home.db --dry-run
+```
 
-Mã nằm trong `packages/homebridge-knx-v3/`; đăng ký platform `KNXV3`, dùng `knx`
-kết nối trực tiếp. Cài dependency riêng:
+Inspect the generated plan before using `--apply`, which changes configuration and
+restarts Homebridge. See [Google Sheets synchronization](google-sheets-sync.md) for
+registry setup.
+
+## Direct KNX plugin
+
+The experimental [Homebridge KNX v3 package](../packages/homebridge-knx-v3/README.md)
+connects directly to KNX. It uses the `KNXV3` platform and its own device schema;
+it does not consume SQLite or `mqttthing` configuration.
 
 ```bash
 npm ci --prefix packages/homebridge-knx-v3 --ignore-scripts
 ```
 
-Đọc [README plugin](../packages/homebridge-knx-v3/README.md) và tạo cấu hình riêng.
-Plugin không đọc trực tiếp schema SQLite/mqttthing. Một số loại accessory chỉ là khung;
-không xem danh sách type trong manager là bằng chứng hỗ trợ đầy đủ.
+Switch and dimmer classes contain control logic. Temperature currently initializes
+a characteristic without KNX feedback; other accessory types are scaffolds.
+A type appearing in the accessory manager does not imply complete device support.
 
-## Plugin v2 cũ
+## Legacy v2 tooling
 
-`deploy/homebridge-v2/setup.sh` cài package v2 và patch file trong node_modules cho
-ACK DALI, debounce dimmer và scene pulse. Đây là lựa chọn tương thích cũ, không phải
-bộ cài v3. Vì chưa pin phiên bản v2, patch có thể không khớp bản package mới.
-Không chạy tự động trong CI; đối chiếu phiên bản và backup cấu hình trước khi sử dụng.
+`deploy/homebridge-v2/setup.sh` installs and patches `homebridge-knx-v2` for DALI
+acknowledgement, dimmer command handling, and scene pulses. It is a legacy utility,
+not a v3 installer. The upstream v2 package version is not pinned, so patches must
+be reviewed against the installed version. See the [v2 guide](../deploy/homebridge-v2/README.md).
 
-## Chuyển hệ thống hiện có
+## Existing installations
 
-Giữ identity và pairing HomeKit; không reset Homebridge để hợp nhất repository.
-Đối chiếu nguồn riêng, mức dim, nhiệt độ màu, feedback ETS và thời gian scene pulse.
-Lệnh live test v3 yêu cầu `KNX_LIVE_TEST=true`, `KNX_IP` và toàn bộ `KNX_TEST_*_GA`;
-chúng không có giá trị mặc định của nhà thật.
+Preserve HomeKit identity and pairing. Check power group addresses, brightness,
+color temperature, ETS feedback, and scene timing in a separate test environment
+before changing an existing installation.
+
+The v3 live test requires `KNX_LIVE_TEST=true`, `KNX_IP`, and the documented test
+group-address variables. It performs real hardware writes and is never run by CI.

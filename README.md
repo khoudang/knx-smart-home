@@ -1,13 +1,15 @@
-# AICONTROL Smart Home
+# KNX Smart Home
 
-**A modular KNX automation platform with conversational control and Homebridge integration.**
+**Conversational KNX automation with Telegram, Zalo, and Homebridge.**
 
-[![CI](https://github.com/khoudang/aicontrol-smart-home/actions/workflows/ci.yml/badge.svg)](https://github.com/khoudang/aicontrol-smart-home/actions/workflows/ci.yml)
+Developed by **AICONTROL**.
+
+[![CI](https://github.com/khoudang/knx-smart-home/actions/workflows/ci.yml/badge.svg)](https://github.com/khoudang/knx-smart-home/actions/workflows/ci.yml)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 ![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Node.js 22+](https://img.shields.io/badge/Node.js-22%2B-339933?logo=nodedotjs&logoColor=white)
 
-AICONTROL connects Telegram and Zalo to a Python automation agent, a local device registry,
+KNX Smart Home connects Telegram and Zalo to a Python automation agent, a local device registry,
 and a KNX control bridge. Google Sheets provides a configurable source for device data,
 while Homebridge integrations expose supported devices to Apple Home.
 
@@ -60,8 +62,8 @@ backend for each device to avoid duplicate accessories and conflicting commands.
 ### 1. Install
 
 ```bash
-git clone https://github.com/khoudang/aicontrol-smart-home.git
-cd aicontrol-smart-home
+git clone https://github.com/khoudang/knx-smart-home.git
+cd knx-smart-home
 python -m venv .venv
 ```
 
@@ -196,6 +198,7 @@ Run the unit tests and source checks from the repository root:
 ```bash
 python -m unittest discover -s tests
 python scripts/check_public_tree.py
+python scripts/check_docs.py
 git diff --check
 ```
 
@@ -203,8 +206,8 @@ The publication checker examines tracked files. Stage new files before running i
 GitHub Actions runs unit tests, Python/JavaScript/Bash syntax checks, publication checks,
 and a Gitleaks scan of Git history. Hardware tests are opt-in and require explicit configuration.
 
-For contributions, describe the behavior being changed, include relevant checks, and
-use synthetic fixtures rather than deployment data.
+See [Contributing](CONTRIBUTING.md) for development workflow and review expectations.
+See [Compatibility](docs/compatibility.md) for component maturity and validation coverage.
 
 ## Project status
 
@@ -216,6 +219,12 @@ and dependency pinning is not yet complete across all runtimes.
 Start in dry-run mode and validate device mappings, permissions, and state feedback before
 enabling hardware control. See [deployment guidance](docs/setup.md) and the
 [security policy](SECURITY.md) for operational details.
+
+## Maintained by AICONTROL
+
+KNX Smart Home is developed by AICONTROL. Use [GitHub Issues](https://github.com/khoudang/knx-smart-home/issues)
+for reproducible bugs and feature requests. Report vulnerabilities through the
+[security policy](SECURITY.md).
 
 ## License
 

@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible problem in an existing component.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Use synthetic data. Remove credentials, user identifiers, and private installation details.
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: Include the commit SHA or release tag.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Component, OS, Python/Node version, and relevant runtime versions.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal example with expected and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Include only logs and configuration needed to reproduce the problem.

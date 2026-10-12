@@ -1,6 +1,6 @@
 # Tools
 - name: control_knx
-  description: Bật hoặc tắt thiết bị KNX dựa trên ID và lệnh (ON/OFF)
+  description: Switch a KNX device by validated device ID and ON/OFF command
   path: middleware.py
   parameters:
     device_id: string

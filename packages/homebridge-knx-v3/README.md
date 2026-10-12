@@ -1,17 +1,30 @@
-# Homebridge KNX V3
+# Homebridge KNX v3
 
-Plugin thử nghiệm từ hệ mã nguồn hợp nhất. Entry point `index.js` đăng ký
-`homebridge-knx-v3` / `KNXV3`. Package khai báo Homebridge 2 và Node.js >=20;
-repo chính dùng Node.js 22 trong CI.
+Experimental direct KNX integration for Homebridge, included in KNX Smart Home.
+The plugin registers `homebridge-knx-v3` with platform name `KNXV3`.
+
+## Requirements
+
+- Homebridge 2.x, as declared in the package peer dependencies.
+- Node.js 20 or later; repository CI uses Node.js 22.
+- A KNX IP interface and installation-specific group-address mappings.
+
+## Installation
+
+From this directory:
 
 ```bash
 npm ci --ignore-scripts
+npm pack
 ```
 
-Từ môi trường Homebridge thử nghiệm, cài plugin bằng đường dẫn package này hoặc
-đóng gói bằng `npm pack`. Chưa phát hành package npm từ repository hợp nhất.
+Install the local package in a separate Homebridge test environment. This repository
+does not provide a verified npm release of the plugin.
 
-Cấu hình `platforms` mẫu (IP dưới đây thuộc dải dành cho tài liệu, phải thay bằng IP của bạn):
+## Configuration
+
+Add a platform entry to your Homebridge configuration. Replace the documentation
+IP address and example group addresses with values from your installation.
 
 ```json
 {
@@ -24,11 +37,32 @@ Cấu hình `platforms` mẫu (IP dưới đây thuộc dải dành cho tài li�
 }
 ```
 
-Switch, dimmer và temperature có logic riêng. Các service khác hiện phần lớn là
-khung mã, cần hoàn thiện và thử nghiệm trước khi sử dụng. Dimmer hỗ trợ các trường
-`control`, `level`, `power.control`, `cct`; CCT có phép đảo Kelvin riêng cần hiệu chỉnh
-theo thiết bị. Không mặc định cấu hình mqttthing/v2 tương thích với plugin này.
+## Implementation status
 
-`test-knx.js` gửi lệnh phần cứng thật, không phải unit test. Nó chỉ chạy khi có
-`KNX_LIVE_TEST=true`, `KNX_IP`, `KNX_TEST_POWER_GA`, `KNX_TEST_CONTROL_GA` và
-`KNX_TEST_BRIGHTNESS_GA`. CI chỉ kiểm tra cú pháp, không chạy file này.
+| Accessory | Current implementation |
+| --- | --- |
+| Switch | Control logic present; validate status feedback on hardware. |
+| Dimmer | Brightness, switching, optional power and color-temperature logic present. |
+| Temperature | Initial characteristic value only; KNX feedback is not implemented. |
+| Other registered types | Scaffolds requiring implementation and integration tests. |
+
+Dimmers use `control`, `level`, optional `power.control`, and `cct` fields.
+Color-temperature conversion requires device-specific validation.
+Configuration for `mqttthing` or the v2 plugin is not interchangeable with this schema.
+
+## Hardware testing
+
+`test-knx.js` performs real KNX writes. It requires all of:
+
+- `KNX_LIVE_TEST=true`
+- `KNX_IP`
+- `KNX_TEST_POWER_GA`
+- `KNX_TEST_CONTROL_GA`
+- `KNX_TEST_BRIGHTNESS_GA`
+
+CI checks syntax only and never runs this script. Use a dedicated test device and
+verify every address before enabling the test.
+
+## License
+
+[MIT](LICENSE).

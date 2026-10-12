@@ -1,6 +1,6 @@
 # Architecture
 
-AICONTROL separates language understanding from execution. Chat adapters send
+KNX Smart Home separates language understanding from execution. Chat adapters send
 messages to the AI agent API. The agent classifies intent with an LLM, validates
 the result against a strict schema, resolves entities from SQLite, checks
 permissions and safety policy, then calls deterministic skill executors.
@@ -21,7 +21,7 @@ The LLM is not allowed to provide trusted identifiers such as KNX group
 addresses, MQTT topics, database IDs, or owner role decisions. Those values come
 from code and database state.
 
-## Migrated Domains
+## Intent domains
 
 - `access_control`
 - `weather`
@@ -31,7 +31,7 @@ from code and database state.
 
 `general_chat` intentionally remains a conversational fallback.
 
-## Production Deployment Shape
+## Recommended deployment layout
 
 Production code is deployed through immutable release directories. Runtime
 state is kept outside Git and symlinked in:

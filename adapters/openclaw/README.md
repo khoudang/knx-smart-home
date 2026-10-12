@@ -1,41 +1,57 @@
-# OpenClaw adapter và công cụ tương thích
+# OpenClaw adapter
 
-Các skills, middleware KNX, generator Homebridge và Siri webhook được giữ tại đây
-để phát triển/chuyển hệ thống cũ. Chúng không tự khởi động cùng agent chính và chưa
-được chuyển thành client của API agent. Không chạy cùng đường điều khiển chính trên
-cùng thiết bị nếu chưa thiết kế việc phối hợp.
+Optional OpenClaw skills, KNX middleware, Homebridge generators, and a Siri webhook
+for KNX Smart Home. These tools run independently of the core agent and are not
+clients of its HTTP API. Assign separate command ownership before running them
+alongside the main control path.
 
-## Thiết lập cục bộ
+## Setup
+
+Run from this directory:
 
 ```bash
 npm ci --ignore-scripts
 python -m pip install -r requirements.txt
 mkdir -p config/cache logs
+cp .env.example .env
 ```
 
-Tạo `.env` từ `.env.example`; giữ `KNX_DRY_RUN=true`. Các lệnh Node/Python trực tiếp
-cần biến được export trong shell; script `start_bot.sh` tự nạp `.env`.
-Đặt `GOOGLE_SHEET_ID` và `GOOGLE_CREDENTIALS_FILE` (đường dẫn tuyệt đối tới JSON ngoài Git).
-Tự tạo các tab cần dùng: `KNX`, `permissions`, `faq`, `KNX_history`; xem column map trong skills.
+Keep `KNX_DRY_RUN=true`. Direct Node/Python commands require exported environment
+variables; `start_bot.sh` loads the local `.env` file.
 
-`node skills/fetch_devices.js --refresh` tạo cache thiết bị riêng của bạn.
-`config/devices.example.json` là mảng trống để chỉ schema cấp cao; lệnh điều khiển bị
-từ chối khi chưa có cache. `config/scenes.example.json` và `permissions.example.json`
-là template trống, không chứa dữ liệu hay quyền của nhà cũ.
+Set `GOOGLE_SHEET_ID` and `GOOGLE_CREDENTIALS_FILE` to your spreadsheet and an
+absolute credential path outside Git. Create the required `KNX`, `permissions`,
+`faq`, and `KNX_history` tabs; consult the skills for their column mappings.
 
-OpenClaw CLI và runtime phải được cấu hình bằng công cụ setup của phiên bản bạn cài.
-Repository không kèm `openclaw.json`, `agent.json`, prompt cá nhân hoặc memory backup.
-Đăng ký skills phù hợp với phiên bản đó; JSON schema OpenClaw cần kiểm tra riêng.
+```bash
+node skills/fetch_devices.js --refresh
+```
 
-## Quyền và Siri
+This creates a local device cache. Control is rejected when the cache is absent.
+The JSON examples under `config/` are empty templates, not a working installation.
 
-`OPENCLAW_ADMIN_USERS` là danh sách `channel:userId` phân cách bằng dấu phẩy của chính bạn.
-Không có admin mặc định. `init_permissions_sheet.js` chỉ thêm admin từ biến này.
+Configure the installed OpenClaw runtime using its own setup tools and register
+skills according to that version. Runtime agent configuration and memory are local
+state and must remain outside version control.
 
-Siri webhook cần `SIRI_SECRET_TOKEN`, nghe loopback và từ chối yêu cầu khi thiếu token.
-`generate_hb.py` tạo config chứa token runtime; file đầu ra bị gitignore, không chia sẻ.
-Middleware mặc định chặn kết nối KNX, yêu cầu cấu hình IP và registry cục bộ hợp lệ.
-Đây vẫn là đường thực thi cũ, chưa có đầy đủ policy của agent chính.
+## Permissions and Siri
 
-Các lệnh quản lý permission, xóa lịch sử và cập nhật token có tác động thật khi bạn tự
-chạy. Token chỉ lưu trong runtime OpenClaw ở home directory, không backup vào source checkout.
+`OPENCLAW_ADMIN_USERS` is a comma-separated list of `channel:userId` entries.
+There are no default administrators. `init_permissions_sheet.js` initializes only
+the administrators supplied through this setting.
+
+The Siri webhook requires `SIRI_SECRET_TOKEN` and listens on loopback.
+`generate_hb.py` produces runtime configuration containing this token; do not
+publish or share its output. KNX middleware defaults to dry-run and requires
+explicit network configuration and a valid local registry for live operation.
+
+These tools do not implement the complete policy of the core agent. Permission
+management, history deletion, and credential updates have real effects when run.
+Token updates target the user's local OpenClaw runtime and must not be included
+in source backups.
+
+## Compatibility
+
+OpenClaw schemas and skill registration depend on the installed runtime version.
+Compatibility has not been established across all releases. Test this adapter
+independently before connecting it to an operational installation.

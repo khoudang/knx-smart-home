@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /chatbot-gateway
+      - /adapters/openclaw
+      - /packages/homebridge-knx-v3
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+  - package-ecosystem: pip
+    directories:
+      - /ai-agent
+      - /knx-bridge
+      - /scene-engine
+      - /simulator
+      - /adapters/openclaw
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3

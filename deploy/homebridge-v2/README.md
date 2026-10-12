@@ -1,20 +1,40 @@
-# KNX -> HomeKit (Raspberry Pi + Homebridge + homebridge-knx-v2)
+# Legacy Homebridge v2 tooling
 
-## Cai dat may moi
-1. `sudo bash setup.sh`
-2. `sudo cp config.template.json /var/lib/homebridge/config.json`
-3. Sua `ip` (dia chi KNX IP Interface, mac dinh 192.0.2.10) va `pin` neu can
-4. `sudo systemctl restart homebridge`
+Installation and patching utilities for `homebridge-knx-v2` on Raspberry Pi/Linux.
+For other integration paths, see the [Homebridge guide](../../docs/homebridge.md).
 
-## 3 bug da fix (xem comment trong setup.sh)
-1. DALI Gateway im lang bo qua lenh -> fix bit ack-request
-2. Dim nhay ve 100% -> bo lenh On du thua
-3. Scene khong tu tat -> auto OFF sau 800ms
+## Scope
 
-## Dia chi Group Address (KNX) dang dung
-- Switch thuong: 0/0/x (control) + 0/0/(x+1) (status)
-- Dimmer G1 Dan Tran: 0/1/0 (switch, khong dung), 0/1/2 (brightness control), 0/1/1 (status on/off), 0/1/3 (status brightness)
-- Scene: 0/4/0, 0/4/2
+The setup script installs dependencies and patches upstream files to adjust:
 
-## Van de con ton dong (chua fix)
-- HomeKit doi khi khong tu cap nhat trang thai real-time khi ETS ghi truc tiep len bus (phai thoat app vao lai). Nghi ngo do characteristic thieu quyen NOTIFY, chua dieu tra sau.
+- DALI acknowledgement requests.
+- Redundant dimmer ON commands.
+- Scene auto-reset pulses, using an 800 ms interval.
+
+The upstream package version is not pinned. Review every patch against the target
+version before use. This utility is not an installer for the v3 package.
+
+## Installation
+
+Use a test environment first. The script changes system packages and installed
+Node modules; preserve the existing Homebridge configuration and pairing data.
+
+```bash
+sudo bash setup.sh
+```
+
+Adapt `config.template.json` to your KNX interface, group addresses, and HomeKit
+identity. The sample IP is reserved for documentation. Do not overwrite an existing
+Homebridge configuration without reviewing and backing it up.
+
+For a new installation only:
+
+```bash
+sudo cp config.template.json /var/lib/homebridge/config.json
+sudo systemctl restart homebridge
+```
+
+## Known limitation
+
+Real-time HomeKit updates after direct ETS writes have not been fully validated.
+Check notification behavior and feedback mappings before adopting this integration.

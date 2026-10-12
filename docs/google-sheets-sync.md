@@ -42,9 +42,9 @@ account and that a client email and private key are supplied. Set GOOGLE_EXPECTE
 Run on the Raspberry Pi with production environment loaded:
 
 ```bash
-python scripts/doctor.py
-python scripts/sync_google_sheet.py --database data/smart_home.db
-python scripts/sync_homebridge.py --database data/smart_home.db --dry-run
+python -m scripts.doctor
+python -m scripts.sync_google_sheet --database data/smart_home.db
+python -m scripts.sync_homebridge --database data/smart_home.db --dry-run
 ```
 
 The sync should preserve device IDs, aliases, rooms/areas, capabilities, and KNX

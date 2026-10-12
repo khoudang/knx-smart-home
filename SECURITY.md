@@ -1,21 +1,39 @@
-# Bảo mật và cấu hình riêng
+# Security policy
 
-Không commit `.env`, service-account JSON, token, Sheet ID/URL thật, dữ liệu người dùng,
-IP thiết bị nội bộ, cache, database, log hoặc backup. Chỉ dùng file `.example` đã làm sạch.
-Gitignore không loại bí mật đã có trong commit cũ; repo hợp nhất bắt đầu bằng lịch sử mới.
+## Reporting a vulnerability
 
-Nếu credential từng tồn tại trong repo nguồn, hãy thu hồi/thay credential tại nhà cung cấp.
-Việc loại khỏi repo mới không vô hiệu hóa credential hoặc xóa nó khỏi repo nguồn.
+Report vulnerabilities through [GitHub private vulnerability reporting](https://github.com/khoudang/knx-smart-home/security/advisories/new).
+Do not post credentials, private installation details, or exploit instructions in a public issue.
 
-Chạy `python scripts/check_public_tree.py` sau khi stage thay đổi và quét Gitleaks trước
-khi công khai commit. Không công bố giá trị credential trong issue, PR hoặc log CI.
+Include the affected commit, component, impact, and a minimal reproduction using
+synthetic data. There is no guaranteed response-time or long-term-support commitment.
+Security fixes currently target the default branch.
 
-API agent và Siri webhook dành cho môi trường tin cậy; không expose API agent trực tiếp
-ra Internet. Broker mẫu và công cụ cài đặt cũ cần cấu hình riêng trước khi triển khai.
+## Deployment boundaries
 
-KNX/MQTT dry-run bật mặc định. Thiết bị cửa/cổng/khóa và scene có kiểm soát riêng trong
-agent chính. Plugin Homebridge trực tiếp và middleware legacy không có cùng policy;
-chỉ sử dụng khi đã kiểm tra quyền, mạng và mapping thiết bị.
+The agent API trusts identity supplied by a chat gateway. Keep it on loopback or
+behind an authenticated, trusted network boundary; do not expose it directly to the
+Internet. The sample MQTT broker allows anonymous connections for local development.
+Production deployments require their own broker authentication and authorization.
 
-Nếu phát hiện credential lộ, gửi báo cáo riêng cho chủ repository qua thông tin liên hệ
-trên hồ sơ GitHub; không tạo issue công khai chứa bí mật.
+Core agent access-control policy is not automatically applied to the direct
+Homebridge plugin or standalone OpenClaw tools. Review each execution path separately.
+See the [security model](docs/security-model.md) for details.
+
+## Credentials and runtime state
+
+Keep environment files, service-account keys, tokens, customer data, installation
+addresses, databases, logs, and backups outside version control. Commit synthetic
+examples only. Generated configuration can contain credentials even when its name
+does not suggest that it does.
+
+Run `python scripts/check_public_tree.py` after staging changes. CI also scans Git
+history with Gitleaks. These checks reduce accidental disclosure but do not replace
+manual review. If a credential is exposed, revoke or rotate it at the provider.
+Deleting a file or commit does not invalidate a credential.
+
+## Hardware operations
+
+Start with `KNX_DRY_RUN=true` and `MQTT_DRY_RUN=true`. Validate group addresses,
+permissions, sensitive-device policies, and state feedback before live operation.
+Never include live hardware writes in routine automated tests.
