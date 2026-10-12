@@ -6,7 +6,7 @@ flask==3.0.3
 fastapi
 uvicorn
 requests
-google-api-python-client==2.160.0
+google-api-python-client==2.201.0
 google-auth==2.38.0
 simpleeval
 yfinance
